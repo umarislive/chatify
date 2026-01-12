@@ -18,5 +18,8 @@
   "bugs": {
     "url": "https://github.com/umarislive/chatify/issues"
   },
-  "homepage": "https://github.com/umarislive/chatify#readme"
+  "homepage": "https://github.com/umarislive/chatify#readme",
+  "dependencies": {
+    "resend": "^6.7.0"
+  }
 }
