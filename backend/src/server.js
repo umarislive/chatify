@@ -1,11 +1,13 @@
 import express from "express";
 const app = express();
 import path from "path";
+import cookieParser from "cookie-parser";
 
 import authRoutes from "./routes/auth.route.js";
 import connectDB from "./lib/db.js";
 import { ENV } from "./lib/env.js";
 
+app.use(cookieParser());
 app.use(express.json());
 app.use("/api/auth", authRoutes);
 
