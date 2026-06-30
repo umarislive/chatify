@@ -41,6 +41,20 @@ export const sendMessage = async (req, res) => {
     const { id: receiverId } = req.params;
     const senderId = req.user._id;
 
+    if (!image || !text) {
+      return res.status(400).json({ message: "Text or image is required." });
+    }
+    // .equals mongoose helper method for comparing object-IDs
+    if (senderId.equals(receiverId)) {
+      return res
+        .status(400)
+        .json({ message: "Cannot send messages to yourself." });
+    }
+    const receiverExists = await User.exists({ _id: receiverId });
+    if (!receiverExists) {
+      return res.status(404).json({ message: "Receiver not found." });
+    }
+
     let imageUrl = "";
     if (image) {
       const uploadResponse = await cloudinary.uploader.upload(image);
@@ -79,8 +93,8 @@ export const getChatPartners = async (req, res) => {
         messages.map((msg) =>
           msg.senderId.toString() === loggedInUserId.toString()
             ? msg.receiverId.toString()
-            : msg.senderId.toString()
-        )
+            : msg.senderId.toString(),
+        ),
       ),
     ];
 
