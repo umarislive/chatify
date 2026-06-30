@@ -13,8 +13,8 @@ import { arcjetProtection } from "../middlewares/arcjet.middleware.js";
 //   return res.status(200).json({ message: "Test route" });
 // });
 // router.use(arcjetProtection);
-router.post("/signup", arcjetProtection, signup);
-router.post("/login", arcjetProtection, login);
+router.post("/signup", signup);
+router.post("/login", login);
 router.post("/logout", arcjetProtection, logout);
 router.put("/update-profile", arcjetProtection, protectRoute, updateProfile);
 router.get("/check", arcjetProtection, protectRoute, (req, res) =>
